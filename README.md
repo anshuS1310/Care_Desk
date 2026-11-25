@@ -6,9 +6,7 @@ Care Desk gives hospital staff one clear place to record admissions, find a pati
 
 `React + TypeScript` · `FastAPI + Python` · `Neon PostgreSQL` · `Render ready`
 
-**Repository:** [anshuS1310/Care_Desk](https://github.com/anshuS1310/Care_Desk)
-
-**Live app:** _Pending Render deployment. Add the Static Site URL here after the final live check._
+**Live app:** https://care-desk-1.onrender.com/
 
 > [!IMPORTANT]
 > This is a fictional-data demo. The brief does not require login, so a public deployment has no access control. Anyone with its URL can view or change records. **Never enter real patient information.**
@@ -126,40 +124,6 @@ npm run dev
 On macOS/Linux, use `.venv/bin/python` in Terminal 1. Open **http://localhost:5173**. The API health check is **http://localhost:8000/health** and its interactive docs are **http://localhost:8000/docs**. If port 8000 is already in use and `/health` says `{"status":"ok"}`, the API is already running; open the frontend instead of starting a second copy.
 
 Optional fictional records can be restored with `backend/.venv/Scripts/python.exe backend/scripts/seed_demo.py` from the project root. The seed is safe to repeat.
-
-## Deploy on Render, from the beginning
-
-The order is **Neon schema → Python API → React site → CORS → live check**. The schema is already applied to this Neon branch, but repeat the schema command if you use another database.
-
-### 1. Publish the repository
-
-The public GitHub repository is [Care_Desk](https://github.com/anshuS1310/Care_Desk). Push `main` before using Render. Keep `.env.local`, `.env`, `.neon`, virtual environments, and `node_modules` out of commits.
-
-### 2. Create the API service
-
-1. Sign in at [Render Dashboard](https://dashboard.render.com/) and choose **New → Web Service**.
-2. Connect GitHub if asked, then select `anshuS1310/Care_Desk` and branch `main`.
-3. Set **Root Directory** to `backend` and **Runtime** to Python.
-4. Set **Build Command** to `pip install -r requirements.txt`.
-5. Set **Start Command** to `uvicorn app.main:app --host 0.0.0.0 --port $PORT`.
-6. In **Environment**, add `PYTHON_VERSION=3.13.5`. Add `DATABASE_URL` using the **pooled** URL from your private root `.env.local` or Neon Dashboard. Paste it only into Render's private environment field. Leave `CORS_ORIGINS` unset for now.
-7. Create/deploy the service. Copy its HTTPS URL. Open `<API_URL>/health`; it must return `{"status":"ok"}`. Also open `<API_URL>/api/patients` to confirm the schema is available. A first request may take longer while the service wakes.
-
-### 3. Create the frontend site
-
-1. In Render, choose **New → Static Site**, select the same repository and `main` branch.
-2. Set **Root Directory** to `frontend`.
-3. Set **Build Command** to `npm ci && npm run build` and **Publish Directory** to `dist`.
-4. In **Environment**, add `NODE_VERSION=24.16.0` and `VITE_API_BASE_URL=<API_URL>` using the API's full HTTPS origin **without a trailing slash**. This value is compiled into the site, so set it **before** the build and rebuild if it changes.
-5. Deploy and copy the Static Site's HTTPS URL.
-
-### 4. Allow the site to call the API
-
-Return to the Python Web Service's **Environment** page. Add `CORS_ORIGINS=<STATIC_SITE_URL>` using the exact origin, with no trailing slash or path. If you use multiple site origins, separate them with commas. Save and let the API redeploy.
-
-### 5. Check the public app and add its link here
-
-Open the Static Site on a phone and desktop. Using **fictional data**, add a patient, search and filter, edit, discharge, and delete with confirmation. Restart or redeploy the API and confirm a retained record is still present. Then replace the **Live app** line at the top of this README with the real Static Site URL and push that small README change.
 
 ## Verify and troubleshoot
 
