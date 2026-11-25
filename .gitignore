@@ -1,0 +1,13 @@
+.neon
+node_modules/
+.env.local
+.env
+.env.*
+!.env.example
+frontend/dist/
+backend/.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+*.tsbuildinfo
+frontend/.vite/

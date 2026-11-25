@@ -1,0 +1,15 @@
+[
+  {"name": "Anita Rao", "valid": true, "cleaned": "Anita Rao"},
+  {"name": "  Anita   Rao  ", "valid": true, "cleaned": "Anita Rao"},
+  {"name": "रमेश", "valid": true, "cleaned": "रमेश"},
+  {"name": "தமிழ்", "valid": true, "cleaned": "தமிழ்"},
+  {"name": "Élodie", "valid": true, "cleaned": "Élodie"},
+  {"name": "élodie", "valid": true, "cleaned": "élodie"},
+  {"name": "", "valid": false},
+  {"name": "    ", "valid": false},
+  {"name": "Ramesh2", "valid": false},
+  {"name": "O'Brien", "valid": false},
+  {"name": "́Ramesh", "valid": false},
+  {"name": "रमेश‍", "valid": false},
+  {"name": "Anita-Rao", "valid": false}
+]
